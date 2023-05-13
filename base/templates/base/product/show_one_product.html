@@ -116,7 +116,33 @@
       <button class="btn">Add New Comment</button>
    </form>
    <div class="comments__show__all">
-      
+      {% for comment in comments %}
+      <div class="comment">
+         <div class="comment__header">
+            <div class="comment__header__left">
+               <img 
+               {% if profile.photo %} 
+               src="/statis/media/{{comment.user.profile.photo}}" 
+               {% else %}
+               src="https://images.pexels.com/photos/2085832/pexels-photo-2085832.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
+               {% endif %}
+               alt="{{comment.user.profile.photo}}">
+               <div class="comment__header__left__right">
+                  <b>{{comment.user.username}}</b>
+                  <span class="comment__stay__stars">{{comment.starts}}</span>
+               </div>
+            </div>
+            <div class="comment__header__right">
+               <a href="{% url 'base:delete-product-review' product.slug comment.id %}" class="delete icon">
+                  <i class="fa-solid fa-trash"></i>
+               </a>
+            </div>
+         </div>
+         <div class="comment__body">
+            {{comment.body}}
+         </div>
+      </div>
+      {% endfor %}
    </div>
 </div>
 

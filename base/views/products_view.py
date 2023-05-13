@@ -3,7 +3,7 @@ from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.views.decorators.csrf import csrf_exempt
 
-from ..models import Product, ProductType, ProductImage, ProductType, Profile
+from ..models import Product, ProductType, ProductImage, ProductType, Profile, Comment
 from ..forms import ProductForm, ProductTypeForm
 from ..utils import slug_generator, checking_slug
 from ..filters import ProductFilter
@@ -24,6 +24,7 @@ def home_view(request):
 
 def show_one_product_view(request, slug):
    product = Product.objects.get(slug=slug)
+   comments = Comment.objects.filter(product=product)
    
    liked = False
    trash_goods = []
@@ -58,14 +59,12 @@ def show_one_product_view(request, slug):
       if type == 'trash':
          all_products = product.product_types.all()         
          checked_goods = [int(i) for i in request.POST.getlist('trash__products')]
-         print('__________________{}'.format(checked_goods))
 
          for good in all_products:
             if good.id not in  checked_goods:
                profile.trash.remove(good.id)
          
          for good in checked_goods:
-            print('________________', good)
             profile.trash.add(good)
          
          return redirect('base:show-one-product', product.slug)
@@ -74,17 +73,44 @@ def show_one_product_view(request, slug):
          message = request.POST.get('message')
          stars = request.POST.getlist('star')
          
-         print(stars)
+         if not message:
+            return messages.error(request, 'Please enter a message')
          
+         if not stars:
+            return messages.error(request, 'Please choose stars')
+         
+         comment = Comment.objects.create(
+            user = request.user,
+            product = product,
+            body = message,
+            starts = len(stars),
+         )
+         
+         return redirect('base:show-one-product', product.slug)
             
    context = {
       'product': product,
       
       'trash_goods': trash_goods,
       'liked': liked,
+      
+      'comments': comments,
    }
    return render(request, 'base/product/show_one_product.html', context)
 
+@login_required(login_url='base:sign-in')
+def delete_product_review_view(request, slug, comment_id):
+   product = Product.objects.get(slug=slug)
+   comment = Comment.objects.get(id=comment_id)
+   
+   if comment:
+      if comment.user == request.user:
+         comment.delete()
+         
+         return redirect('base:show-one-product', product.slug)
+      return messages.error(request, 'you do not have permission to delete')
+   return messages.error(request, 'comment not found')
+         
 @login_required(login_url='base:sign-in')
 def add_new_product(request):
    page_type = 'add_product_part_one'

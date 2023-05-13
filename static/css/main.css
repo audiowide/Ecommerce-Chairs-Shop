@@ -200,3 +200,10 @@ input {
    color: var(--pink);
    cursor: pointer;
 }
+
+a {
+   color: white;
+}
+a:hover {
+   color: var(--pink);
+}
