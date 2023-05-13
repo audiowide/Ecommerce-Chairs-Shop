@@ -1,0 +1,20 @@
+{% include 'main.html' %}
+{% load static %}
+
+{% block title %}
+<link rel="stylesheet" href="{% static '/css/product/all_products.css' %}">
+<title>All Products</title>
+{% endblock title %}
+
+{% block content %}
+<div class="page">
+  
+   <div class="products">
+      {% for product in products %}
+        {% include 'base/product/product.html' %}
+      {% endfor %}
+   </div>
+</div>
+
+<script src="{% static 'js/all_product_slider.js' %}"></script>
+{% endblock content %}

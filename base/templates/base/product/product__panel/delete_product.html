@@ -1,0 +1,9 @@
+<form action="" method ='POST' class="delete__form">
+   {% csrf_token %}
+   {% if page_type == 'delete_product_type' %}
+   <h2>Delete Product Type</h2>
+   {% else %}
+   <h2>Delete Product</h2>
+   {% endif %}
+   <button method="POST" class="btn">DELETE</button>
+</form>

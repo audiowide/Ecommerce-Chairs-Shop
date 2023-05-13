@@ -1,0 +1,39 @@
+{% load static %}
+<form  method="POST" enctype="multipart/form-data">
+   {% csrf_token %}
+   <h2>Update Product</h2>
+
+   {% for field in form  %}
+      <div class = "form__component">
+         {% if field.errors %}
+         <ul class="errorlist">
+            {% for error in field.errors %}
+            <li>{{ error }}</li>
+            {% endfor %}
+         </ul>
+         {% endif %}
+         {{ field.label_tag }} {{ field }}
+      </div>
+   {% endfor %}
+     
+      <div class="form__component">
+         <label for="">Delete Images</label>
+         <div class="photos">
+            {% for image in product.images_gallery.all %}
+               <div class="photo">
+                  <input type="checkbox" value="{{image.id}}" class="photo__checked" name="photo__check">
+                  <img src="/static/media/{{image.image}}" alt="">
+               </div>
+            {% endfor %}
+         </div>
+      </div>
+      <div class="form__component">
+         <label for="">Upload Images</label>
+         <input type="file" value="some"  name="images" class="images" multiple>
+      </div>
+      <div class="print__logos"></div>
+      
+   <button class="btn" type="submit" >continue</button>
+</form>
+
+<script src="{% static 'js/show_uploader_images.js' %}"></script>

@@ -1,0 +1,33 @@
+{% include 'main.html' %}
+{% load static  %}
+
+{% block title %}
+<link rel="stylesheet" href="{% static '/css/product/all_products.css' %}">
+<link rel="stylesheet" href="{% static '/css/home.css' %}">
+<title>Home Page</title>
+{% endblock title %}
+
+{% block content %}
+<div class="home page">
+   <form class="product__filters" >
+      {% csrf_token %}
+
+      {% for field in filter.form  %}
+         {{ field }}
+      {% endfor %}
+
+      <button class="btn-search"><i class="fa-solid fa-magnifying-glass"></i></button>
+   </form>
+   <div class="page__buttons">
+      {% if request.user.is_superuser %}
+         <a href="{% url 'base:add-new-product' %}" class="btn">+ </a>
+      {% endif %}
+   </div>
+   <h3 class="page__name"><i class="fa-solid fa-bag-shopping"></i> New Products </h3>
+   <div class="products">
+      {% for product in products %}
+         {% include 'base/product/product.html' %}
+      {% endfor %}
+   </div>
+</div>
+{% endblock content %}

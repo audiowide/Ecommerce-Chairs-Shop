@@ -1,0 +1,29 @@
+{% include 'main.html' %}
+{% load static %}
+
+{% block title %}
+<link rel="stylesheet" href="{% static 'css/user/update_profile.css' %}">
+<link rel="stylesheet" href="{% static 'css/product/product_panel.css' %}">
+
+<title>Update Product Info</title>
+{% endblock title %}
+
+{% block content %}
+<div class="pre__form">
+   <div class="menu">
+      <a class="menu__item" href="{% url 'base:update-product' product.slug  %}"><i class="fa-solid fa-pen-to-square"></i> Update Info</a>
+      <a class="menu__item" href="{% url 'base:product-types' product.slug %}"><i class="fa-solid fa-list"></i> Product Types</a>
+      <a class="menu__item" href="{% url 'base:delete-product' product.slug %}"><i class="fa-solid fa-trash-can"></i> Delete Product</a>
+   </div>
+   {% if page_type == 'update_info' %}
+      {% include 'base/product/product__panel/update_product.html' %}
+   {% elif page_type == 'update_product_types' %}
+      {% include 'base/product/product__panel/update_product_types.html' %}
+   {% elif page_type == 'add_new_product_type' %}
+      {% include 'base/product/product__panel/add_new_product_type.html' %}
+   {% elif page_type == 'delete_product_type' or page_type == 'delete_product' %}
+      {% include 'base/product/product__panel/delete_product.html' %}
+   {% endif %}
+
+</div>
+{% endblock content %}

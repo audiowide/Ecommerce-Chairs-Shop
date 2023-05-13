@@ -1,0 +1,80 @@
+@import './varibles.css';
+
+.pre_form {
+   display: flex;
+   justify-content: space-between;
+   align-items: center;
+   flex-direction: column;
+   width: 100vw;
+   height: 100vh;
+
+   background-position: center;
+   background-repeat: no-repeat;
+   background-size: cover;
+   background-attachment: fixed;
+
+   padding: 10px;
+}
+form {
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   flex-direction: column;
+   height: 100vh;
+   width: 100%;
+   background-color: rgb(0,0,0,.5);
+   color: var(--white);
+   padding: 10px;
+}
+form h2 {
+   margin-bottom: 5%;
+}
+form input {
+   background-color: var(--gray);
+   border: none;
+   outline: none;
+   padding: 10px;
+   font-size: var(--text-l);
+   margin-bottom: 10px;
+}
+.btn:hover {
+   background-color: var(--pink);
+   color: var(--black)
+}
+
+.pre__form__another {
+   width: 100%;
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   padding: 4% ;
+   border-radius: 50px 50px 0 0;
+   /* background-color: var(--white)  */
+}
+.pre__form__another a {
+   margin: 0 4px;
+   color: var(--white);
+   transition: all .3s linear;
+   font-weight: bold;
+}
+.pre__form__another a:hover {
+   color: var(--pink);
+}
+.social__register {
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   width: 100%;
+   gap: 10px
+}
+.social__register a{
+   color: white;
+   transition: all .3s linear;
+   font-size: 44px;
+}
+.social__register a:hover {
+   color: var(--pink);
+}
+input:hover, input:focus {
+   border: 2px solid var(--pink);
+}

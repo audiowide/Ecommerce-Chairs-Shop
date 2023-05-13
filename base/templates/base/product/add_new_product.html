@@ -1,0 +1,29 @@
+{% include 'main.html' %}
+{% load static %}
+
+{% block title %}
+<link rel="stylesheet" href="{% static 'css/user/update_profile.css' %}">
+<title>Add New Product</title>
+{% endblock title %}
+
+{% block content %}
+<form action="" method="POST" enctype="multipart/form-data">
+   {% csrf_token %}
+   <h2>Add New Product</h2>
+
+   {% for field in form  %}
+      <div class = "form__component">
+         {% if field.errors %}
+         <ul class="errorlist">
+            {% for error in field.errors %}
+            <li>{{ error }}</li>
+            {% endfor %}
+         </ul>
+         {% endif %}
+         {{ field.label_tag }} {{ field }}
+      </div>
+   {% endfor %}
+
+   <button class="btn" >continue</button>
+</form>
+{% endblock content %}

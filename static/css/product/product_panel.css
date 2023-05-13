@@ -1,0 +1,43 @@
+@import './../varibles.css';
+
+.pre__form {
+   display: flex;
+   justify-content: start;
+   align-items: start;
+   flex-direction: column;
+   width: 100%;
+   margin-bottom: 20%;
+}
+.menu {
+   display: flex;
+   justify-content: start;
+   align-items: start;
+   flex-direction: column;
+   width: 100%;
+   overflow-x: hidden;
+   overflow-y: auto;
+   background-color: rgb(254,254,254,.05);
+   margin-top: 5px;
+}
+.menu a {
+   font-size: 22px;
+   transition: all .3s linear;
+   width: 100%;
+   padding: 6px;
+   cursor: pointer;
+   gap: 10px;
+   color:var(--white)
+}
+.menu a:hover{
+   color: var(--pink);
+   background-color: rgb(254,254,254,.05);
+}
+form {
+   margin-top: 5%;
+}
+
+.delete__form {
+   margin-bottom: 0;
+   height: 60vh;
+   min-height: 60vh;
+}

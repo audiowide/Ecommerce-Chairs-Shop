@@ -1,0 +1,26 @@
+{% include 'main.html' %}
+{% load static  %}
+
+{% block title %}
+<link rel="stylesheet" href="{% static '/css/product/all_products.css' %}">
+<link rel="stylesheet" href="{% static '/css/home.css' %}">
+<title>Lower Products Page</title>
+{% endblock title %}
+
+{% block content %}
+<div class="home page">
+   <h3 class="page__name"><i class="fa-solid fa-heart"></i> Lower Products</h3>
+   {% if profile.liked.all|length > 0 %}
+   <div class="products">
+      {% for product in profile.liked.all %}
+         {% include 'base/product/product.html' %}
+      {% endfor %}
+   </div>
+   {% else %}
+   <div class="not__found">
+      <i class="fa-solid fa-cart-flatbed"></i>
+      <h2>Products Not Found</h2>
+     </div>
+   {% endif %}
+</div>
+{% endblock content %}

@@ -1,0 +1,31 @@
+{% include 'main.html' %}
+{% load static  %}
+
+{% block title %}
+<link rel="stylesheet" href="{% static '/css/product/all_products.css' %}">
+<link rel="stylesheet" href="{% static '/css/home.css' %}">
+<link rel="stylesheet" href="{% static 'css/product/product.css' %}">
+<title>Lower Products Page</title>
+{% endblock title %}
+
+{% block content %}
+<form class="home page" method="POST">
+   <div class="page__name">
+      <h3><i class="fa-solid fa-cart-shopping"></i> Trash</h3>
+         {% csrf_token %}
+         <button class="">Delete</button>
+   </div>
+   {% if profile.liked.all|length > 0 %}
+   <div class="products">
+      {% for product_type in profile.trash.all %}
+      {% include 'base/product/product_type.html' %}
+      {% endfor %}
+   </div>
+   {% else %}
+  <div class="not__found">
+   <i class="fa-solid fa-cart-flatbed"></i>
+   <h2>Products Not Found</h2>
+  </div>
+   {% endif %}
+</form>
+{% endblock content %}

@@ -1,0 +1,19 @@
+<form action="" method="POST" enctype="multipart/form-data">
+   {% csrf_token %}
+   <h2>Add New Product</h2>
+
+   {% for field in form  %}
+      <div class = "form__component">
+         {% if field.errors %}
+         <ul class="errorlist">
+            {% for error in field.errors %}
+            <li>{{ error }}</li>
+            {% endfor %}
+         </ul>
+         {% endif %}
+         {{ field.label_tag }} {{ field }}
+      </div>
+   {% endfor %}
+
+   <button class="btn" >continue</button>
+</form>

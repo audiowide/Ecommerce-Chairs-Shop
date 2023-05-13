@@ -1,0 +1,146 @@
+@import './../varibles.css';
+
+form {
+   width: 100%;
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   flex-direction: column;
+   min-height: 100vh;
+   padding: 0 5%;
+   margin-bottom: 29%;
+}
+.form__component {
+   display: flex;
+   width: 100%;
+   justify-content: start;
+   align-items: start;
+   flex-direction: column;
+   width: 100%;
+   margin-bottom: 5px;
+}
+form h2 {
+   margin-bottom: 10px;
+}
+.photos {
+   display: flex;
+   justify-content: start;
+   align-items: start;
+   flex-wrap: wrap;
+   width: 100%;
+   margin-top: 10px;
+}
+
+.photo {
+   display: flex;
+   justify-content: start;
+   align-items: start;
+   flex-wrap: wrap;
+   position: relative;
+   margin: 5px;
+}
+.photo input {
+   z-index: 1;
+   width: 90px;
+   height: 90px;
+   opacity: 0;
+   position: absolute;
+}
+.photo input:hover {
+   opacity: .2;
+}
+.photo input:checked {
+   opacity: .6;
+}
+.photo img {
+   width: 90px;
+   height: 90px;
+   object-fit: cover;
+}
+.product__types__more {
+   display: flex;
+   justify-content: end;
+   align-items: center;
+   width: 100%;
+   margin: 10px 0;
+   padding: 0 10px;
+}
+.product__types {
+   display: flex;
+   justify-content: start;
+   align-items: start;
+   flex-direction: column;
+   width: 100%;
+   padding: 10px;
+}
+.product__type {
+   display: grid;
+   grid-template-columns: 2.5fr 1fr;
+   width: 100%;
+   padding: 5px 0;
+   border-bottom: 1px solid rgb(254,254,254,.1);
+   gap: 10px;
+   margin-bottom: 4px;
+   transition: all .3s linear;
+}
+.product__type:hover {
+   background-color: rgb(254,254,254,.05);
+}
+.product__type__left {
+   width: 100%;
+}
+.product__type__left h3 {
+   font-size: 24px;
+   margin-bottom: 4px;
+}
+.product__type__right img {
+   width: 100%;
+   height: 100%;
+   max-height: 100px;
+   object-fit: cover;
+   border-radius: 5px;
+}
+.product__type__left div {
+   display: flex;
+   justify-content: space-between;
+   align-items: center;
+   width: 100%;
+   font-size: 18px;
+}
+.product__type__right span {
+   font-size: 20px;
+   font-weight: bold;
+}
+.product__type__right__buttons {
+   display: flex;
+   justify-content: start;
+   align-items: center;
+   width: 100%;
+   margin-top: 4px;
+   gap: 6px
+}
+.product__type__right__buttons a {
+   font-size: 28px;
+   transition: all .3s linear;
+   color: var(--white)
+}
+.product__type__right__buttons a:hover {
+   color: var(--pink);
+   cursor: pointer;
+}
+
+input {
+   color: #fff;
+   background-color: transparent;
+}
+.form__component input {
+   color: white;
+}
+
+form h2 {
+   margin-top: 5%;
+   margin-bottom: 2%;
+}
+.product__filters {
+   width: 100%;
+}

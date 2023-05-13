@@ -1,0 +1,150 @@
+{% include 'main.html' %}
+{% load static social_share %}
+
+{% block title %}
+<link rel="stylesheet" href="{% static 'css/product/product.css' %}">
+<title>{{product.title}}</title>
+{% endblock title %}
+
+{% block content %}
+<div class=" product">
+   
+   <div class="product__header">
+      <a href="/"><i class="fa-solid fa-arrow-left icon"></i></a>
+     <div class="product__header__right">
+         <span class="share"><i class="fa-solid fa-share icon"></i></span>
+         <form action="" method="POST">
+            {% csrf_token %}
+            <input type="text" name="type" value="like" style="display:none">
+            <button 
+               type="submit" 
+               class="icon__heart"
+               {% if liked %} style="color: rgb(214, 40, 40, 1)"{% endif %}
+               ><i class="fa-solid fa-heart"></i></button>
+         </form>
+     </div>
+   </div>
+
+   <form action="" method="post">
+   <div class="product__footer">
+         {% csrf_token %}
+         <input type="text" name="type" value="trash" style="display:none">
+         <button type="submit" class="btn" id="add_to_trash">To Trash</button>
+      <a type="submit" class="btn btn--primary">Buy Now</a>
+   </div>
+
+  <div class="product__info">
+      <h3>{{product.title}}</h3>
+      <div class="product__info__short">
+         <div class="">
+            <i class="fa-solid fa-heart"></i>
+            {{product.liked.count}} Lowers
+         </div>
+         <div class="">
+            <i class="fa-solid fa-star"></i>
+            0 Stars
+         </div>
+         <div class="">
+            <i class="fa-solid fa-comment"></i>
+            0 Comments
+         </div>
+      </div>
+   <div class="product__images__for__slider" style="display:none">
+      {% for image in product.images_gallery.all %}
+         <img src="/static/media/{{image.image}}" alt="" class="image_for_slider">
+      {% endfor %}
+   </div>
+   <div class="product__slider">
+         <div class="product__slider__left"></div>
+         <img src="" alt="" class="product__slider__place">
+         <div class="product__slider__right"></div>
+   </div>
+   <div class="product__slider__points"></div>
+   <p>{{product.about}}</p>
+  </div>
+  <div class="product__types">
+   {% for product_type in product.product_types.all %}
+      <div class="pre__product__type">
+      {% if product_type.id in trash_goods  %}
+         <input type="checkbox" name="trash__products" class="trash__product" value="{{product_type.id}}" checked>
+      {% else %}
+         <input type="checkbox" name="trash__products" class="trash__product" value="{{product_type.id}}">
+      {% endif %}
+         <div class="product__type">
+         <img src="/static/media/{{ product_type.image }}" alt="">
+         <div class="product__type__desc">
+            <h3>{{product_type.title}}</h3>
+            <p>{{product_type.color}} - {{product_type.material}} - {{product_type.width}} - {{product_type.height}} - {{product_type.depth}} - {{product.counts}}</p>
+            <h2>${{product_type.cost}}.00</h2>
+         </div>
+      </div>
+      </div>
+   {% endfor %}
+</form>
+
+<p class="product__more__info">Delivery Time: {{product.deliveryTime}}</p>
+<div class="comments">
+   <h3 class="page__name">Comments</h3>
+   <form action="" method="POST">
+      {% csrf_token %}
+
+      <input type="text" name="type" value="comment" style="display:none">
+      <div class="stars">
+         <div class="star">
+            <i class='fa-solid fa-star'></i>
+            <input type="checkbox" name="star" class="input_star" value="1">
+         </div>
+         <div class="star">
+            <i class='fa-solid fa-star'></i>
+            <input type="checkbox" name="star" class="input_star" value="2">
+         </div>
+         <div class="star">
+            <i class='fa-solid fa-star'></i>
+            <input type="checkbox" name="star" class="input_star" value="3">
+         </div>
+         <div class="star">
+            <i class='fa-solid fa-star'></i>
+            <input type="checkbox" name="star" class="input_star" value="4">
+         </div>
+         <div class="star">
+            <i class='fa-solid fa-star'></i>
+            <input type="checkbox" name="star" class="input_star" value="5">
+         </div>
+      </div>
+
+      <textarea name="message" id="" placeholder="Enter your comment..."></textarea>
+      <button class="btn">Add New Comment</button>
+   </form>
+   <div class="comments__show__all">
+      
+   </div>
+</div>
+
+  </div>
+</div>
+
+<div class="share__panel">
+   <div class="share__panel__header">
+      <i class="fa-solid fa-xmark icon share__panel__close"></i>
+   </div>
+   <div class="share__panel__icons">
+      <i class="fa-solid fa-copy share__icon copy"></i>
+      {% post_to_twitter 'New Cool Chair: {{product.title}}' object_or_url '<i class="fa-brands fa-twitter share__icon"></i>'  %}
+      {% post_to_facebook object_or_url '<i class="fa-brands fa-facebook share__icon"></i>' %}
+      {% post_to_reddit  "New Cool Chair: {{product.title}}" object_or_url '<i class="fa-brands fa-reddit-alien share__icon"></i>' %}
+      {% post_to_telegram    "New Cool Chair: {{product.title}}" object_or_url '<i class="fa-brands fa-telegram share__icon"></i>' %}
+      {% post_to_whatsapp object_or_url '<i class="fa-brands fa-whatsapp share__icon"></i>'  %}
+      <i class="fa-brands fa-instagram share__icon"></i>
+      <i class="fa-brands fa-tiktok share__icon"></i>
+      <i class="fa-brands fa-discord share__icon"></i>
+      <i class="fa-brands fa-youtube share__icon"></i>
+      <i class="fa-brands fa-pinterest share__icon"></i>
+      <i class="fa-brands fa-vimeo share__icon"></i>
+   </div>
+</div>
+
+<script src="{% static 'js/product_slider.js' %}"></script>
+<script src="{% static 'js/share.js' %}"></script>
+<script src="{% static 'js/trash.js' %}"></script>
+<script src="{% static 'js/reviews.js' %}"></script>
+{% endblock content %}

@@ -1,0 +1,5 @@
+<form action="" method="POST">
+   {% csrf_token %}
+   <a href="{% url 'base:product-types', product.slug %}">Return</a>
+   <button>Delete</button>
+</form>

@@ -1,0 +1,63 @@
+{% include 'main.html' %}
+{% load static %}
+
+{% block title %}
+<link rel="stylesheet" href="{% static 'css/user/profile.css' %}">
+<title>Profile</title>
+{% endblock title %}
+
+{% block content %}
+<div class="profile">
+   <div class="profile__header">
+      <div class="profile__header__base">
+         <div class="profile__header__base__qu">
+            <a href="{% url 'base:profile-update' %}"><i class="fa-solid fa-pen-to-square"></i></a>
+            <a href="{% url 'base:sign-out' %}">
+               <i class="fa-solid fa-right-from-bracket"></i>
+            </a>
+         </div>
+         <img
+         {% if profile.photo %} 
+         src="/static/media/{{profile.photo}}"
+         {% else %}
+         src="https://images.pexels.com/photos/2085832/pexels-photo-2085832.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
+         {% endif %}
+          alt="{{profile.user.username}}">
+         <h2>{{user.username}}</h2>
+         <span>{{user.email}}</span>
+      </div>
+      <div class="profile__location">
+         {% if location %}
+         <div class="profile__location__link">
+            <h3><i class="fa-solid fa-truck"></i> Delivery Data</h3>
+            <a href="{% url 'base:profile-update-delivery-view' %}" class="fa-solid fa-arrow-right" title="change delivery data"></a>
+         </div>
+         <div class="profile__location__data">
+            {% if location.country %}
+            <div><h3>Country: </h3> {{location.country}}</div>
+            {% endif %}
+            {% if location.region %}
+            <div><h3>Region: </h3> {{location.region}}</div>
+            {% endif %}
+            {% if location.city %}
+            <div><h3>City: </h3> {{location.city}}</div>
+            {% endif %}
+            {% if location.place %}
+            <div><h3>Place: </h3> {{location.place}}</div>
+            {% endif %}
+            {% if location.city %}
+            <div><h3>City: </h3> {{location.city}}</div>
+            {% endif %}
+            {% if location.zip %}
+            <div><h3>Zip: </h3> {{location.zip}}</div>
+            {% endif %}
+         </div>
+         {% else %}
+         <div class="profile__location__data">
+            <a href="{% url 'base:profile-create-delivery-view' %}" class="btn">Add Delivery Info</a>
+         </div>
+         {% endif %}
+      </div>
+   </div>
+</div>
+{% endblock content %}

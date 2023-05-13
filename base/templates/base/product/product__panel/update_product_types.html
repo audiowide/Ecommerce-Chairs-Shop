@@ -1,0 +1,54 @@
+<div class="product__types__more">
+   <a href="{% url 'base:add-new-product-type' product.slug %}" class="btn">+</a>
+</div>
+
+<div class="product__types">
+   {% if product.product_types.all|length  != 0 %}
+      {% for type in product.product_types.all %}
+         <div class="product__type">
+            <div class="product__type__left">
+               <h3>{{type.title}}</h3>
+               <div class="">
+                  <b>Color: </b>
+                  {{type.color}}
+               </div>
+               {% if type.material %}
+                  <div class="">
+                     <b>Material: </b>
+                     {{type.material}}
+                  </div>
+               {% endif %}
+               {% if type.width %}
+               <div class="">
+                  <b>Width: </b>
+                  {{type.width}}
+               </div>
+               {% endif %}
+               {% if type.height %}
+               <div class="">
+                  <b>Height: </b>
+                  {{type.height}}
+               </div>
+               {% endif %}
+               {% if type.depth %}
+               <div class="">
+                  <b>Depth: </b>
+                  {{type.depth}}
+               </div>
+            {% endif %}
+            </div>
+            <div class="product__type__right">
+               <img src="/static/media/{{type.image}}" alt="{{type.title}}">
+               <span>{{type.counts}}/${{type.cost}}.00</span>
+              <div class="product__type__right__buttons">
+              
+              </div>
+            </div>
+            <a  href="{% url 'base:update-product-type' product.slug type.id %}" class="btn">edit</a>
+            <a  href="{% url 'base:delete-product-type' product.slug type.id %}" class="btn">delete</a>
+         </div>
+      {% endfor %}
+   {% else %}
+   <h2>Products Not Found</h2>
+   {% endif %}
+</div>

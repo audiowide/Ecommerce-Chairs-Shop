@@ -1,0 +1,67 @@
+{% include 'main.html' %}
+{% load static account socialaccount %}
+{% providers_media_js %}
+
+{% block title %}
+<link rel="stylesheet" href="{% static 'css/auth.css' %}">
+{%  if page_type == 'sign_in' %}
+<title>Sign In</title>
+{% else %}
+<title>Sign Up</title>
+{% endif %}
+{% endblock title %}
+
+{% block content %}
+<div class="pre__form" 
+   {% if page_type == 'sign_in' %}
+   style="background-image: url('https://images.pexels.com/photos/3617178/pexels-photo-3617178.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1');"
+   {% else %}
+   style="background-image: url('https://images.pexels.com/photos/5662648/pexels-photo-5662648.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1');"
+   {% endif %}
+>
+
+   <form method="POST" >
+      {% csrf_token %}
+
+      {%  if page_type == 'sign_in' %}
+         <h2>Sign In</h2>
+
+         <input type="text" name="name" placeholder="Name"/>
+         <input type="password" name="password" placeholder="Password"/>
+      {% else %}
+      <h2>Sign Up</h2>
+
+      {% for field in form  %}
+         <div class = "form__component">
+            {% if field.errors %}
+            <ul class="errorlist">
+               {% for error in field.errors %}
+               <li>{{ error }}</li>
+               {% endfor %}
+            </ul>
+            {% endif %}
+            {{ field }}
+         </div>
+      {% endfor %}
+
+      {% endif %}
+      <button class="btn">Continue</button>
+
+      or 
+
+      <div class="social__register">
+         <a href="{% provider_login_url 'google' %}"><i class="fa-brands fa-google"></i></a>
+         <a href="{% provider_login_url 'facebook' method='oauth2' %}"><i class="fa-brands fa-facebook"></i></a>
+         <a href="i class="fa-brands fa-facebook"></i></a>
+      </div>
+      <div class="pre__form__another">
+         {%  if page_type == 'sign_in' %}
+         or <a href="{% url 'base:sign-up' %}"> Sign Up</a>
+         {% else %}
+         or <a href="{% url 'base:sign-in' %}"> Sign In</a>
+         {% endif %}
+      </div>
+   </form>  
+
+</div>
+{% endblock content %}

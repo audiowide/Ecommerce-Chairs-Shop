@@ -1,0 +1,9 @@
+<div class="product">
+   <a class="product__images__slider" href="{% url 'base:show-one-product' product.slug %}">
+      <img src="/static/media/{{ product.images_gallery.all.1.image }}" alt="{{ product.images_gallery.all.1.id }}" class="product__slider__image">
+   </a>
+   <a class="link" href="{% url 'base:show-one-product' product.slug %}">{{ product.title }}</a>
+   {% if request.user.is_superuser %}
+      <a href="{% url 'base:update-product' product.slug %}" class="btn">update</a>
+   {% endif %}
+</div>
