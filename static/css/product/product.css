@@ -299,7 +299,7 @@ textarea {
    border-radius: 10px;
    padding-bottom: 4px;
    margin-bottom: 10px;
-   transition: all .3s linear;
+   transition: all .3s linear;;
 }
 .comment:hover {
    background-color:  rgb(254,254,254,.08);

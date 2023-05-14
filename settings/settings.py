@@ -54,6 +54,9 @@ INSTALLED_APPS = [
     
     'django_filters',
     'django_social_share',
+    
+    'rest_framework',
+    'corsheaders', 
 ]
 
 # load with https (openssl sertificate) :]
@@ -74,6 +77,8 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    
+    "corsheaders.middleware.CorsMiddleware",
 ]
 
 ROOT_URLCONF = 'settings.urls'
