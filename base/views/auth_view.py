@@ -45,7 +45,7 @@ def sign_up_view(request):
          Profile(
             user = user
          )
-         login(request, user, login='django.contrib.auth.backends.ModelBackend')
+         login(request, user, backend='django.contrib.auth.backends.ModelBackend')
          return redirect('base:profile')
    
    context =  {

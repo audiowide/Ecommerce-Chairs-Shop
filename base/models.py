@@ -12,10 +12,6 @@ class Profile(models.Model):
    trash = models.ManyToManyField('ProductType', related_name='trash', blank=True)
    
    def delete(self):
-      # profile_location  = ProfileLocation.objects.get(pk=self.location.pk)
-      profile_location = self.location.pk
-      profile_location.delete()
-      
       super(Profile, self).delete() 
    
    def __str__(self):

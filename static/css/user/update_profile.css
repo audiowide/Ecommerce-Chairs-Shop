@@ -144,3 +144,14 @@ form h2 {
 .product__filters {
    width: 100%;
 }
+
+.danger__zone {
+   margin: 3% 0;
+   width: 100%;
+   padding: 3% 10px;
+   border: 2px solid var(--pink);
+   border-radius: 10px;
+}
+.danger__zone p {
+   color:  var(--pink);
+}

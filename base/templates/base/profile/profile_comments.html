@@ -1,0 +1,61 @@
+{% include 'main.html' %}
+{% load static %}
+
+{% block title %}
+<link rel="stylesheet" href="{% static 'css/user/profile.css' %}">
+<link rel="stylesheet" href="{% static 'css/product/product.css' %}">
+<title>Profile</title>
+{% endblock title %}
+
+{% block content %}
+<div class="profile">
+   <div class="profile__header">
+
+      <div class="product__header">
+         <a href="{% url 'base:profile' %}"><i class="fa-solid fa-arrow-left icon"></i></a>
+        <div class="product__header__right">
+           <h2>Comments</h2>
+        </div>
+      </div>
+
+      <div class="comments__show__all">
+         {% if comments|length != 0 %}
+         {% for comment in comments %}
+         <div class="comment">
+            <div class="comment__header">
+               <div class="comment__header__left">
+                  <img 
+                  {% if profile.photo %} 
+                  src="/statis/media/{{comment.user.profile.photo}}" 
+                  {% else %}
+                  src="https://images.pexels.com/photos/2085832/pexels-photo-2085832.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
+                  {% endif %}
+                  alt="{{comment.user.profile.photo}}">
+                  <div class="comment__header__left__right">
+                     <b>{{comment.user.username}}</b>
+                     <span class="comment__stay__stars">{{comment.starts}}</span>
+                  </div>
+               </div>
+               <div class="comment__header__right">
+                  <a href="{% url 'base:delete-product-review' comment.product.slug comment.id %}" class="delete icon">
+                     <i class="fa-solid fa-trash"></i>
+                  </a>
+                  <a href="{% url 'base:show-one-product' comment.product.slug %}" class="delete icon">
+                     <i class="fa-solid fa-arrow-right"></i>
+                  </a>
+               </div>
+            </div>
+            <div class="comment__body">
+               {{comment.body}}
+            </div>
+         </div>
+         {% endfor %}
+         {% else %}
+         <h2>Comments Not Found</h2>
+         {% endif %}
+      </div>
+   </div>
+</div>
+<script src="{% static 'js/reviews.js' %}"></script>
+
+{% endblock content %}

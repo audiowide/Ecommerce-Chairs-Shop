@@ -42,11 +42,11 @@
          </div>
          <div class="">
             <i class="fa-solid fa-star"></i>
-            0 Stars
+            {{ stars_count }} Stars
          </div>
          <div class="">
             <i class="fa-solid fa-comment"></i>
-            0 Comments
+            {{product.comment_set.count}} Comments
          </div>
       </div>
    <div class="product__images__for__slider" style="display:none">
@@ -85,36 +85,38 @@
 <p class="product__more__info">Delivery Time: {{product.deliveryTime}}</p>
 <div class="comments">
    <h3 class="page__name">Comments</h3>
-   <form action="" method="POST">
-      {% csrf_token %}
+  {% if user.is_authenticated %}
+  <form action="" method="POST">
+   {% csrf_token %}
 
-      <input type="text" name="type" value="comment" style="display:none">
-      <div class="stars">
-         <div class="star">
-            <i class='fa-solid fa-star'></i>
-            <input type="checkbox" name="star" class="input_star" value="1">
-         </div>
-         <div class="star">
-            <i class='fa-solid fa-star'></i>
-            <input type="checkbox" name="star" class="input_star" value="2">
-         </div>
-         <div class="star">
-            <i class='fa-solid fa-star'></i>
-            <input type="checkbox" name="star" class="input_star" value="3">
-         </div>
-         <div class="star">
-            <i class='fa-solid fa-star'></i>
-            <input type="checkbox" name="star" class="input_star" value="4">
-         </div>
-         <div class="star">
-            <i class='fa-solid fa-star'></i>
-            <input type="checkbox" name="star" class="input_star" value="5">
-         </div>
+   <input type="text" name="type" value="comment" style="display:none">
+   <div class="stars">
+      <div class="star">
+         <i class='fa-solid fa-star'></i>
+         <input type="checkbox" name="star" class="input_star" value="1">
       </div>
+      <div class="star">
+         <i class='fa-solid fa-star'></i>
+         <input type="checkbox" name="star" class="input_star" value="2">
+      </div>
+      <div class="star">
+         <i class='fa-solid fa-star'></i>
+         <input type="checkbox" name="star" class="input_star" value="3">
+      </div>
+      <div class="star">
+         <i class='fa-solid fa-star'></i>
+         <input type="checkbox" name="star" class="input_star" value="4">
+      </div>
+      <div class="star">
+         <i class='fa-solid fa-star'></i>
+         <input type="checkbox" name="star" class="input_star" value="5">
+      </div>
+   </div>
 
-      <textarea name="message" id="" placeholder="Enter your comment..."></textarea>
-      <button class="btn">Add New Comment</button>
-   </form>
+   <textarea name="message" id="" placeholder="Enter your comment..."></textarea>
+   <button class="btn">Add New Comment</button>
+</form>
+  {% endif %}
    <div class="comments__show__all">
       {% for comment in comments %}
       <div class="comment">
@@ -133,9 +135,11 @@
                </div>
             </div>
             <div class="comment__header__right">
-               <a href="{% url 'base:delete-product-review' product.slug comment.id %}" class="delete icon">
-                  <i class="fa-solid fa-trash"></i>
-               </a>
+             {% if comment.user == request.user %}
+             <a href="{% url 'base:delete-product-review' product.slug comment.id %}" class="delete icon">
+               <i class="fa-solid fa-trash"></i>
+            </a>
+             {% endif %}
             </div>
          </div>
          <div class="comment__body">

@@ -1,0 +1,18 @@
+{% include 'main.html' %}
+{% load static %}
+
+{% block title %}
+<link rel="stylesheet" href="{% static 'css/user/profile.css' %}">
+<title>Profile</title>
+{% endblock title %}
+
+{% block content %}
+<div class="profile">
+   <form action="" method ='POST' class="delete__form">
+      {% csrf_token %}
+      <h2>Delete My Account:</h2>
+
+      <button method="POST" class="btn">YES</button>
+   </form>
+</div>
+{% endblock content %}

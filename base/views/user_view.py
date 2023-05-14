@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
-from ..models import Profile, ProfileLocation
+from ..models import Profile, ProfileLocation, Comment
 from ..forms import UpdateUserForm, UpdateProfileForm, ProfileLocationForm
 
 
@@ -120,3 +120,25 @@ def lower_view(request):
       'profile': profile
    }
    return render(request, 'base/profile/lower.html', context)
+
+@login_required(login_url='base:sign-in')
+def all_comments_view(request):
+   user = request.user
+   comments = Comment.objects.filter(user=user)
+   
+   context = {
+      'comments': comments
+   }
+   return render(request, 'base/profile/profile_comments.html', context)
+
+@login_required(login_url='base:sign-in')
+def delete_account_view(request):
+   user = request.user
+   profile = Profile.objects.get(user=user)
+   
+   if request.method == 'POST':
+      profile.delete()
+      user.delete()
+      return redirect('base:sign-in')
+   
+   return render(request, 'base/profile/delete_account.html')

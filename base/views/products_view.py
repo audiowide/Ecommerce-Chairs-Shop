@@ -26,6 +26,12 @@ def show_one_product_view(request, slug):
    product = Product.objects.get(slug=slug)
    comments = Comment.objects.filter(product=product)
    
+   stars_sum = 0
+   for comment in comments:
+      stars_sum += comment.starts
+   
+   stars_sum = stars_sum / comments.count()
+   
    liked = False
    trash_goods = []
    
@@ -95,6 +101,7 @@ def show_one_product_view(request, slug):
       'liked': liked,
       
       'comments': comments,
+      'stars_count': stars_sum
    }
    return render(request, 'base/product/show_one_product.html', context)
 
