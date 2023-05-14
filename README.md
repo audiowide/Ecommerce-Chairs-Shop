@@ -18,8 +18,8 @@ Database Design:
 
 ![изображение](https://user-images.githubusercontent.com/129586445/234945245-3f6d46bc-f13f-4cce-9164-6ed5ebde6c39.png)
 
-![изображение](https://user-images.githubusercontent.com/129586445/234945470-21d44a84-2c69-42b3-841e-70e5329c5e8e.png)
-
 ![изображение](https://user-images.githubusercontent.com/129586445/236633598-0f684439-a0f6-49fd-b7b9-852469350ca4.png)
 
-![изображение](https://user-images.githubusercontent.com/129586445/236633624-db3231d5-b17d-4e8c-a3e9-0905f5571799.png)
+![изображение](https://github.com/silvistr/Ecommerce-Chairs-Shop/assets/129586445/d6a685d1-a66f-41f6-a78c-3cb44cd72b14)
+
+![изображение](https://github.com/silvistr/Ecommerce-Chairs-Shop/assets/129586445/327992a1-5faf-48f2-ab09-07332b47d540)
